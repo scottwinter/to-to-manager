@@ -2,7 +2,12 @@ package com.fourheronsstudios.todoorganizer.model;
 
 public class ToDoItem {
     private String text;
-    private String date;
+    private int priority;
+
+    public ToDoItem() {}
+    public ToDoItem(String text) {
+        this.text = text;
+    }
 
     public String getText() {
         return text;
@@ -12,11 +17,11 @@ public class ToDoItem {
         this.text = text;
     }
 
-    public String getDate() {
-        return date;
+    public int getPriority() {
+        return priority;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 }

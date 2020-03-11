@@ -5,14 +5,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.fourheronsstudios.todoorganizer.model.ToDoItem;
+
 import java.util.ArrayList;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoViewHolder> {
-    private ArrayList<String> mDataset;
+    private ArrayList<ToDoItem> mDataset;
 
-    ToDoListAdapter(ArrayList<String> myDataset) {
+    ToDoListAdapter(ArrayList<ToDoItem> myDataset) {
         mDataset = myDataset;
     }
 
@@ -24,8 +26,7 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoVi
 
     @Override
     public void onBindViewHolder(ToDoViewHolder holder, int position) {
-        holder.toDoText.setText(mDataset.get(position));
-        holder.toDoDate.setText("3/3/2020");
+        holder.toDoText.setText(mDataset.get(position).getText());
     }
 
     @Override
@@ -35,11 +36,9 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoVi
 
     static class ToDoViewHolder extends RecyclerView.ViewHolder {
         TextView toDoText;
-        TextView toDoDate;
         ToDoViewHolder(View itemView) {
             super(itemView);
             toDoText = itemView.findViewById(R.id.to_do_item_text);
-            toDoDate = itemView.findViewById(R.id.to_do_item_date);
 
         }
     }

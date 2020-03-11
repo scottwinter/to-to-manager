@@ -4,10 +4,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.fourheronsstudios.todoorganizer.model.ToDoItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -41,20 +41,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Handle the click.
+                Log.i(TAG, "This is a log from the FAB");
             }
         });
     }
 
-    private ArrayList<String> populateData() {
-        ArrayList<String> dataList = new ArrayList<>();
-        dataList.add("This is to do #1");
-        dataList.add("Take the trash out");
-        dataList.add("Hopefully this is working");
-        dataList.add("Item number 4");
-        dataList.add("Don't forget to work on the blog post");
-        dataList.add("Hopefully this is working");
-        dataList.add("This is item # 7");
-        dataList.add("Work on practice Android projects");
+    private ArrayList<ToDoItem> populateData() {
+        ArrayList<ToDoItem> dataList = new ArrayList<>();
+        for(int i = 0; i <= 20; i++) {
+            ToDoItem item = new ToDoItem("This is a to-do list item");
+            dataList.add(item);
+        }
+
         return dataList;
     }
 }
