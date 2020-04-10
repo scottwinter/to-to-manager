@@ -1,7 +1,6 @@
 package com.fourheronsstudios.todoorganizer;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.fourheronsstudios.todoorganizer.model.ToDoItem;
@@ -16,9 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import timber.log.Timber;
 
-public class MainActivity extends AppCompatActivity {
-    private final String TAG = "MyLogs";
+public class MainActivity extends AppCompatActivity implements ToDoDialog.ToDoDialogListener {
     DBHelper mydb;
+    ArrayList<ToDoItem> dataList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,19 +53,31 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Handle the click.
-                Log.d(TAG, "This is a log from the FAB");
                 Timber.d("This is a log message from Timber");
+                openToDoDialog();
             }
         });
     }
 
+    private void openToDoDialog() {
+        ToDoDialog toDoDialog = new ToDoDialog();
+        toDoDialog.show(getSupportFragmentManager(), "To Do Dialog");
+    }
+
     private ArrayList<ToDoItem> populateData() {
-        ArrayList<ToDoItem> dataList = new ArrayList<>();
-        for(int i = 0; i <= 20; i++) {
+        dataList = new ArrayList<>();
+        for(int i = 0; i <= 5; i++) {
             ToDoItem item = new ToDoItem("This is a to-do list item");
             dataList.add(item);
         }
 
         return dataList;
+    }
+
+    @Override
+    public void applyText(String todoItem) {
+        Timber.i("This is from the dialog: %s", todoItem);
+
+        dataList.add(new ToDoItem(todoItem));
     }
 }
