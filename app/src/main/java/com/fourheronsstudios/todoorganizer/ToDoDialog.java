@@ -37,7 +37,7 @@ public class ToDoDialog extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String item = toDoItem.getText().toString();
-                        toDoDialogListener.applyText(item);
+                        toDoDialogListener.addTodo(item);
                     }
                 });
         toDoItem = view.findViewById(R.id.to_do_item_text);
@@ -46,7 +46,7 @@ public class ToDoDialog extends DialogFragment {
     }
 
     public interface ToDoDialogListener {
-        void applyText(String todoItem);
+        void addTodo(String todoItem);
     }
 
     @Override

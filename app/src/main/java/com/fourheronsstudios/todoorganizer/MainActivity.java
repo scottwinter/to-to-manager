@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import timber.log.Timber;
 
-public class MainActivity extends AppCompatActivity implements ToDoDialog.ToDoDialogListener {
+public class MainActivity extends AppCompatActivity implements ToDoDialog.ToDoDialogListener, DeleteToDoDialog.DeleteToDoDialogListener {
     DBHelper mydb;
     ArrayList<ToDoItem> dataList;
 
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements ToDoDialog.ToDoDi
         mydb.insertTodo("test todo in SQLite", 2);
         mydb.insertTodo("test todo in SQLite #2", 1);
         ArrayList<ToDoItem> toDos = mydb.getAllTodos();
-        Timber.i("Database todo's: %s", toDos);
+        Timber.d("Database todo's: %s", toDos);
 
         for(ToDoItem item : toDos) {
             mydb.deleteTodos(item.getId());
@@ -75,9 +75,14 @@ public class MainActivity extends AppCompatActivity implements ToDoDialog.ToDoDi
     }
 
     @Override
-    public void applyText(String todoItem) {
+    public void addTodo(String todoItem) {
         Timber.i("This is from the dialog: %s", todoItem);
 
         dataList.add(new ToDoItem(todoItem));
+    }
+
+    @Override
+    public void deleteTodo(ToDoItem todoItem) {
+        dataList.remove(todoItem);
     }
 }
